@@ -6,6 +6,7 @@ name: CI
 on: [ push ]
 jobs:
   build:
+    name: Test it On ${{matrix.os}} and ${{matrix.node-version}}
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
