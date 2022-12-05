@@ -1,13 +1,14 @@
 package prototype
 
-// Cloneable 是原型对象需要实现的接口
-type Cloneable interface {
-	Clone() Cloneable
-}
-
-type PrototypeManager struct {
-	prototypes map[string]Cloneable
-}
+type (
+	// Cloneable  interface that the prototype object needs to implement
+	Cloneable interface {
+		Clone() Cloneable
+	}
+	PrototypeManager struct {
+		prototypes map[string]Cloneable
+	}
+)
 
 func NewPrototypeManager() *PrototypeManager {
 	return &PrototypeManager{
