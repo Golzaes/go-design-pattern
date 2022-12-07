@@ -6,7 +6,7 @@ name: CI
 on: [ push ]
 jobs:
   build:
-    name: Test it On ${{matrix.os}} and ${{matrix.node-version}}
+    name: Test it On ${{matrix.os}} and ${{matrix.go-version}}
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name:  Use go ${{ matrix.go-version }} environment
+      - name: Use go ${{ matrix.go-version }} environment
         uses: actions/setup-go@v3
         with:
           go-version: ${{ matrix.go-version }}
