@@ -1,12 +1,12 @@
 package builder
 
 type (
-	Builder interface {
+	Director struct{ Builder }
+	Builder  interface {
 		f1()
 		f2()
 		f3()
 	}
-	Director struct{ Builder }
 )
 
 type (

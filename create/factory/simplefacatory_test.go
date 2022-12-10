@@ -1,7 +1,6 @@
 package factory
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 )
@@ -39,23 +38,23 @@ func TestNewSay(t *testing.T) {
 	}
 }
 
-func TestSay_Say(t *testing.T) {
-	type args struct {
-		name string
-	}
-	tests := []struct {
-		name string
-		args args
-		want string
-	}{
-		{t.Name(), args{`Payne`}, fmt.Sprintf("Hi, %s\n", `Payne`)},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			s := &SayHi{}
-			if got := s.Say(tt.args.name); got != tt.want {
-				t.Errorf("Say() = %v, want %v", got, tt.want)
-			}
-		})
-	}
+func ExampleSayHello_Say() {
+	// output:
+	// Hello, payne
+	activity := NewActivity(`hello`)
+	activity.Say(`payne`)
+}
+
+func ExampleSayHi_Say() {
+	// output:
+	// Hi, payne
+	activity := NewActivity(`hi`)
+	activity.Say(`payne`)
+}
+
+func ExampleSayBye_Say() {
+	// output:
+	// Bye, payne
+	activity := NewActivity(`bye`)
+	activity.Say(`payne`)
 }
