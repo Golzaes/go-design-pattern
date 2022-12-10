@@ -2,7 +2,7 @@ package prototype
 
 import "testing"
 
-var manager *PrototypeManager
+var manager *ProtoManager
 
 type (
 	Type1 struct{ name string }
