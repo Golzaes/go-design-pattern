@@ -1,5 +1,7 @@
 package factory
 
+import "fmt"
+
 type (
 	DAOFactory interface {
 		CreateOrderMainDAO() OrderMainDAO
@@ -31,9 +33,9 @@ func (*RDBDAOFactory) CreateOrderDetailDAO() OrderDetailDAO  { return &RDBDetail
 func (*JSONDAOFactory) CreateOrderMainDAO() OrderMainDAO     { return &JSONMainDao{} }
 func (*JSONDAOFactory) CreateOrderDetailDAO() OrderDetailDAO { return &JSONDetailDao{} }
 
-func (*TxtMainDao) SaveOrderMain()      {}
-func (*TxtDetailDao) SaveOrderDetail()  {}
-func (*RDBMainDao) SaveOrderMain()      {}
-func (*RDBDetailDao) SaveOrderDetail()  {}
-func (*JSONMainDao) SaveOrderMain()     {}
-func (*JSONDetailDao) SaveOrderDetail() {}
+func (*TxtMainDao) SaveOrderMain()      { fmt.Println(`save main order message to txt`) }
+func (*TxtDetailDao) SaveOrderDetail()  { fmt.Println(`save detail order message to txt`) }
+func (*RDBMainDao) SaveOrderMain()      { fmt.Println(`save main order message to rdb`) }
+func (*RDBDetailDao) SaveOrderDetail()  { fmt.Println(`save detail order message to rdb`) }
+func (*JSONMainDao) SaveOrderMain()     { fmt.Println(`save main order message to json`) }
+func (*JSONDetailDao) SaveOrderDetail() { fmt.Println(`save detail order message to json`) }
