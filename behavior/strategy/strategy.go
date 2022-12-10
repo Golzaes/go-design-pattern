@@ -11,9 +11,9 @@ type (
 	}
 
 	PaymentContext struct {
-		CardId string
-		Name   string
-		Money  int
+		Id    string
+		Name  string
+		Money int
 	}
 
 	PaymentStrategy interface {
@@ -29,15 +29,15 @@ type (
 func (*Cash) Pay(ctx *PaymentContext) { fmt.Printf("Pay $%d to %s by cash\n", ctx.Money, ctx.Name) }
 
 func (*Bank) Pay(ctx *PaymentContext) {
-	fmt.Printf("Pay $%d to %s by bank account %s\n", ctx.Money, ctx.Name, ctx.CardId)
+	fmt.Printf("Pay $%d to %s by bank account %s\n", ctx.Money, ctx.Name, ctx.Id)
 }
 
-func NewPayment(cardId string, name string, money int, strategy PaymentStrategy) *Payment {
+func NewPayment(id, name string, money int, strategy PaymentStrategy) *Payment {
 	return &Payment{
 		context: &PaymentContext{
-			CardId: cardId,
-			Name:   name,
-			Money:  money,
+			Id:    id,
+			Name:  name,
+			Money: money,
 		},
 		strategy: strategy,
 	}
