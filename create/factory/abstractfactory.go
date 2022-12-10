@@ -10,23 +10,30 @@ type (
 )
 
 type (
-	RDBDAOFactory  struct{}
+	TxtDAOFactory  struct{}
 	JSONDAOFactory struct{}
+	RDBDAOFactory  struct{}
 )
 
 type (
-	RDBMainDAO    struct{}
-	RDBDetailDAO  struct{}
-	JSONMainDAO   struct{}
-	JSONDetailDAO struct{}
+	TxtMainDao    struct{}
+	TxtDetailDao  struct{}
+	RDBMainDao    struct{}
+	RDBDetailDao  struct{}
+	JSONMainDao   struct{}
+	JSONDetailDao struct{}
 )
 
-func (*RDBDAOFactory) CreateOrderMainDAO() OrderMainDAO      { return &RDBMainDAO{} }
-func (*RDBDAOFactory) CreateOrderDetailDAO() OrderDetailDAO  { return &RDBDetailDAO{} }
-func (*JSONDAOFactory) CreateOrderMainDAO() OrderMainDAO     { return &JSONMainDAO{} }
-func (*JSONDAOFactory) CreateOrderDetailDAO() OrderDetailDAO { return &JSONDetailDAO{} }
+func (*TxtDAOFactory) CreateOrderMainDAO() OrderMainDAO      { return &TxtMainDao{} }
+func (*TxtDAOFactory) CreateOrderDetailDAO() OrderDetailDAO  { return &TxtDetailDao{} }
+func (*RDBDAOFactory) CreateOrderMainDAO() OrderMainDAO      { return &RDBMainDao{} }
+func (*RDBDAOFactory) CreateOrderDetailDAO() OrderDetailDAO  { return &RDBDetailDao{} }
+func (*JSONDAOFactory) CreateOrderMainDAO() OrderMainDAO     { return &JSONMainDao{} }
+func (*JSONDAOFactory) CreateOrderDetailDAO() OrderDetailDAO { return &JSONDetailDao{} }
 
-func (*RDBMainDAO) SaveOrderMain()      {}
-func (*RDBDetailDAO) SaveOrderDetail()  {}
-func (*JSONMainDAO) SaveOrderMain()     {}
-func (*JSONDetailDAO) SaveOrderDetail() {}
+func (*TxtMainDao) SaveOrderMain()      {}
+func (*TxtDetailDao) SaveOrderDetail()  {}
+func (*RDBMainDao) SaveOrderMain()      {}
+func (*RDBDetailDao) SaveOrderDetail()  {}
+func (*JSONMainDao) SaveOrderMain()     {}
+func (*JSONDetailDao) SaveOrderDetail() {}
