@@ -43,6 +43,4 @@ func NewPayment(cardId string, name string, money int, strategy PaymentStrategy)
 	}
 }
 
-func (p *Payment) Pay() {
-	p.strategy.Pay(p.context)
-}
+func (p *Payment) Pay() { p.strategy.Pay(p.context) }
