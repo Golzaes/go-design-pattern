@@ -16,7 +16,7 @@ func TestBuilder1_Result(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			b := &Builder1{
+			b := &Build1{
 				result: tt.fields.result,
 			}
 			if got := b.Result(); got != tt.want {
@@ -40,7 +40,7 @@ func TestBuilder2_Result(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			b := &Builder2{
+			b := &Build2{
 				result: tt.fields.result,
 			}
 			if got := b.Result(); got != tt.want {
@@ -51,7 +51,7 @@ func TestBuilder2_Result(t *testing.T) {
 }
 
 func TestBuilder1(t *testing.T) {
-	builder := &Builder1{}
+	builder := &Build1{}
 	director := NewDirector(builder)
 	director.Construct()
 	if res := builder.Result(); res != "123" {
@@ -60,10 +60,10 @@ func TestBuilder1(t *testing.T) {
 }
 
 func TestBuilder2(t *testing.T) {
-	builder := &Builder2{}
+	builder := &Build2{}
 	director := NewDirector(builder)
 	director.Construct()
 	if res := builder.Result(); res != 6 {
-		t.Fatalf("Builder2 fail expect 6 acture %d", res)
+		t.Fatalf("Build2 fail expect 6 acture %d", res)
 	}
 }
