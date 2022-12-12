@@ -36,7 +36,6 @@ func TestBuilder2_Result(t *testing.T) {
 		want   int
 	}{
 		{name: t.Name(), fields: fields{2}, want: 2},
-		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
