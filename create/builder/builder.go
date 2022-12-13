@@ -1,34 +1,56 @@
 package builder
 
-type (
-	Director struct{ Builder }
-	Builder  interface {
-		f1()
-		f2()
-		f3()
-	}
-)
-
-type (
-	Build1 struct{ result string }
-	Build2 struct{ result int }
-)
-
-func NewDirector(builder Builder) *Director { return &Director{builder} }
-
-// Construct Product
-func (d *Director) Construct() {
-	d.Builder.f1()
-	d.Builder.f2()
-	d.Builder.f3()
+type People struct {
+	id     uint64
+	name   string
+	age    uint8
+	gender bool
+	height float32
+	bmi    float32
+	addr   string
 }
 
-func (b *Build1) f1()            { b.result += `1` }
-func (b *Build1) f2()            { b.result += `2` }
-func (b *Build1) f3()            { b.result += `3` }
-func (b *Build1) Result() string { return b.result }
+func NewPeople() *People {
+	p := &People{}
+	p.Init()
+	return p
+}
 
-func (b *Build2) f1()         { b.result += 1 }
-func (b *Build2) f2()         { b.result += 2 }
-func (b *Build2) f3()         { b.result += 3 }
-func (b *Build2) Result() int { return b.result }
+func (p *People) Init() {
+	p.id = 10
+	p.name = `payne`
+	p.age = 31
+	p.gender = false
+	p.height = 178.37
+	p.bmi = 28.31
+	p.addr = `xxx,xxx`
+}
+
+func (p *People) WithId(id uint64) *People {
+	p.id = id
+	return p
+}
+func (p *People) WithName(name string) *People {
+	p.name = name
+	return p
+}
+func (p *People) WithAge(age uint8) *People {
+	p.age = age
+	return p
+}
+func (p *People) WithGender(gender bool) *People {
+	p.gender = gender
+	return p
+}
+func (p *People) WithHeight(height float32) *People {
+	p.height = height
+	return p
+}
+func (p *People) WithBmi(bmi float32) *People {
+	p.bmi = bmi
+	return p
+}
+func (p *People) WithAddr(addr string) *People {
+	p.addr = addr
+	return p
+}
