@@ -24,12 +24,17 @@ type (
 type (
 	Cash struct{}
 	Bank struct{}
+	QR   struct{}
 )
 
 func (*Cash) Pay(ctx *PaymentContext) { fmt.Printf("Pay $%d to %s by cash\n", ctx.Money, ctx.Name) }
 
 func (*Bank) Pay(ctx *PaymentContext) {
 	fmt.Printf("Pay $%d to %s by bank account %s\n", ctx.Money, ctx.Name, ctx.Id)
+}
+
+func (*QR) Pay(ctx *PaymentContext) {
+	fmt.Printf("Pay $%d to %s by QR account %s\n", ctx.Money, ctx.Name, ctx.Id)
 }
 
 func NewPayment(id, name string, money int, strategy PaymentStrategy) *Payment {
