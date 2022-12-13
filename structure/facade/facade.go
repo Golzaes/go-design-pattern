@@ -26,7 +26,7 @@ func NewAPI() API {
 	}
 }
 
-func (i *apiImpl) TestIt() string { return fmt.Sprintf("%s\n%s", i.a.TestA(), i.b.TestB()) }
+func (i *apiImpl) TestIt() string { return fmt.Sprintf(`%s\n%s`, i.a.TestA(), i.b.TestB()) }
 
 func (*aModuleImpl) TestA() string { return `A model is tested` }
 func (*bModuleImpl) TestB() string { return `B model is tested` }

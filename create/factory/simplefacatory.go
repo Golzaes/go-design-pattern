@@ -7,7 +7,7 @@ import (
 
 type (
 	// Activity  is simple factory
-	Activity interface{ Say(name string) }
+	Activity interface{ Say(name string) string }
 	// SayHi simple factory implement by Activity
 	SayHi struct{}
 
@@ -32,6 +32,6 @@ func NewActivity(name string) Activity {
 	}
 }
 
-func (s *SayHi) Say(name string)    { fmt.Printf("Hi, %s\n", name) }
-func (s *SayHello) Say(name string) { fmt.Printf("Hello, %s\n", name) }
-func (s *SayBye) Say(name string)   { fmt.Printf("Bye, %s\n", name) }
+func (s *SayHi) Say(name string) string    { return fmt.Sprintf(`Hi, %s`, name) }
+func (s *SayHello) Say(name string) string { return fmt.Sprintf(`Hello, %s`, name) }
+func (s *SayBye) Say(name string) string   { return fmt.Sprintf(`Bye, %s`, name) }

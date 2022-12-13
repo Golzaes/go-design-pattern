@@ -1,8 +1,6 @@
 package singleton
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestLazyInstantiation(t *testing.T) {
 	if LazyInstantiation() != LazyInstantiation() {

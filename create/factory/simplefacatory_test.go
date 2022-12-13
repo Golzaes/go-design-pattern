@@ -38,23 +38,34 @@ func TestNewSay(t *testing.T) {
 	}
 }
 
-func ExampleSayHello_Say() {
-	// output:
-	// Hello, payne
-	activity := NewActivity(`hello`)
-	activity.Say(`payne`)
-}
+func TestSay(t *testing.T) {
+	tests := []struct {
+		name   string
+		active Activity
+		want   string
+	}{
+		{
+			t.Name(),
+			NewActivity(`hello`),
+			`Hello, payne`,
+		},
 
-func ExampleSayHi_Say() {
-	// output:
-	// Hi, payne
-	activity := NewActivity(`hi`)
-	activity.Say(`payne`)
-}
+		{
+			t.Name(),
+			NewActivity(`hi`),
+			`Hi, payne`,
+		},
+		{
+			t.Name(),
+			NewActivity(`bye`),
+			`Bye, payne`,
+		}}
 
-func ExampleSayBye_Say() {
-	// output:
-	// Bye, payne
-	activity := NewActivity(`bye`)
-	activity.Say(`payne`)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.active.Say(`payne`); got != tt.want {
+				t.Errorf("say() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }

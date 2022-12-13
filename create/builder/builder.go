@@ -14,7 +14,7 @@ type (
 	Build2 struct{ result int }
 )
 
-func NewDirector(builder Builder) *Director { return &Director{Builder: builder} }
+func NewDirector(builder Builder) *Director { return &Director{builder} }
 
 // Construct Product
 func (d *Director) Construct() {

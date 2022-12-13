@@ -3,17 +3,35 @@ package factory
 import "testing"
 
 func TestOperator(t *testing.T) {
-	var factory OperatorFactory
+	tests := []struct {
+		name       string
+		factory    OperatorFactory
+		a, b, want int
+	}{
+		{
+			t.Name(),
+			&PlusOperatorFactory{},
+			71,
+			7,
+			78,
+		},
+		{
+			t.Name(),
+			&MinusOperatorFactory{},
+			71,
+			7,
+			64,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := compute(tt.factory, tt.a, tt.b); got != tt.want {
+				t.Errorf("compute() = %v, want %v", got, tt.want)
+			}
+		})
 
-	factory = &PlusOperatorFactory{}
-	if compute(factory, 77, 21) != 98 {
-		t.Fatal("error with factory method pattern")
 	}
 
-	factory = &MinusOperatorFactory{}
-	if compute(factory, 92, 22) != 70 {
-		t.Fatal("error with factory method pattern")
-	}
 }
 
 func compute(factory OperatorFactory, a, b int) int {
