@@ -8,7 +8,6 @@ go-design-pattern
 > design pattern by go(golang) example code
 
 ```text
-
  ____            _               ____       _   _
 |  _ \  ___  ___(_) __ _ _ __   |  _ \ __ _| |_| |_ ___ _ __ _ __
 | | | |/ _ \/ __| |/ _` | '_ \  | |_) / _` | __| __/ _ \ '__| '_ \
