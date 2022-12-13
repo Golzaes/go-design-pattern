@@ -17,7 +17,7 @@ type (
 	}
 
 	PaymentStrategy interface {
-		Pay(*PaymentContext)
+		Pay(*PaymentContext) string
 	}
 )
 
@@ -27,14 +27,16 @@ type (
 	QR   struct{}
 )
 
-func (*Cash) Pay(ctx *PaymentContext) { fmt.Printf("Pay $%d to %s by cash\n", ctx.Money, ctx.Name) }
-
-func (*Bank) Pay(ctx *PaymentContext) {
-	fmt.Printf("Pay $%d to %s by bank account %s\n", ctx.Money, ctx.Name, ctx.Id)
+func (*Cash) Pay(ctx *PaymentContext) string {
+	return fmt.Sprintf(`Pay ¥%d to %s by cash`, ctx.Money, ctx.Name)
 }
 
-func (*QR) Pay(ctx *PaymentContext) {
-	fmt.Printf("Pay $%d to %s by QR account %s\n", ctx.Money, ctx.Name, ctx.Id)
+func (*Bank) Pay(ctx *PaymentContext) string {
+	return fmt.Sprintf(`Pay ¥%d to %s by bank account %s`, ctx.Money, ctx.Name, ctx.Id)
+}
+
+func (*QR) Pay(ctx *PaymentContext) string {
+	return fmt.Sprintf(`Pay ¥%d to %s by QR account %s`, ctx.Money, ctx.Name, ctx.Id)
 }
 
 func NewPayment(id, name string, money int, strategy PaymentStrategy) *Payment {
@@ -48,4 +50,4 @@ func NewPayment(id, name string, money int, strategy PaymentStrategy) *Payment {
 	}
 }
 
-func (p *Payment) Pay() { p.strategy.Pay(p.context) }
+func (p *Payment) Pay() string { return p.strategy.Pay(p.context) }
