@@ -1,56 +1,79 @@
 package builder
 
-type People struct {
-	id     uint64
-	name   string
-	age    uint8
-	gender bool
-	height float32
-	bmi    float32
-	addr   string
+type (
+	Director struct{ builder IBuilder }
+	IBuilder interface {
+		setWindowType()
+		setDoorType()
+		setNumFloor()
+		getHouse() House
+	}
+	House struct {
+		windowType string
+		doorType   string
+		floor      int
+	}
+)
+
+type (
+	IglooBuilder struct {
+		windowType string
+		doorType   string
+		floor      int
+	}
+
+	NormalBuilder struct {
+		windowType string
+		doorType   string
+		floor      int
+	}
+)
+
+func newDirector(b IBuilder) *Director { return &Director{b} }
+
+func (d *Director) setBuilder(b IBuilder) { d.builder = b }
+
+func (d *Director) buildHouse() House {
+	d.builder.setDoorType()
+	d.builder.setWindowType()
+	d.builder.setNumFloor()
+	return d.builder.getHouse()
 }
 
-func NewPeople() *People {
-	p := &People{}
-	p.Init()
-	return p
+func getBuilder(builderType string) IBuilder {
+	if builderType == "normal" {
+		return newNormalBuilder()
+	}
+	if builderType == "igloo" {
+		return newIglooBuilder()
+	}
+	return nil
 }
 
-func (p *People) Init() {
-	p.id = 10
-	p.name = `payne`
-	p.age = 31
-	p.gender = false
-	p.height = 178.37
-	p.bmi = 28.31
-	p.addr = `xxx,xxx`
+func newIglooBuilder() *IglooBuilder   { return &IglooBuilder{} }
+func newNormalBuilder() *NormalBuilder { return &NormalBuilder{} }
+
+func (b *IglooBuilder) setWindowType()  { b.windowType = "Snow Window" }
+func (b *NormalBuilder) setWindowType() { b.windowType = "Wooden Window" }
+
+func (b *IglooBuilder) setDoorType()  { b.doorType = "Snow Door" }
+func (b *NormalBuilder) setDoorType() { b.doorType = "Wooden Door" }
+
+func (b *IglooBuilder) setNumFloor()  { b.floor = 1 }
+func (b *NormalBuilder) setNumFloor() { b.floor = 2 }
+
+func (b *IglooBuilder) getHouse() House {
+	return House{
+		doorType:   b.doorType,
+		windowType: b.windowType,
+		floor:      b.floor,
+	}
 }
 
-func (p *People) WithId(id uint64) *People {
-	p.id = id
-	return p
-}
-func (p *People) WithName(name string) *People {
-	p.name = name
-	return p
-}
-func (p *People) WithAge(age uint8) *People {
-	p.age = age
-	return p
-}
-func (p *People) WithGender(gender bool) *People {
-	p.gender = gender
-	return p
-}
-func (p *People) WithHeight(height float32) *People {
-	p.height = height
-	return p
-}
-func (p *People) WithBmi(bmi float32) *People {
-	p.bmi = bmi
-	return p
-}
-func (p *People) WithAddr(addr string) *People {
-	p.addr = addr
-	return p
+func (b *NormalBuilder) getHouse() House {
+	return House{
+		doorType:   b.doorType,
+		windowType: b.windowType,
+		floor:      b.floor,
+	}
 }
