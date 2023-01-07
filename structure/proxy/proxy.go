@@ -14,6 +14,14 @@ type (
 	}
 )
 
+func (n *Nginx) handleRequest(url, method string) (int, string) {
+	allowed := n.checkRateLimiting(url)
+	if !allowed {
+		return 403, "Not Allowed"
+	}
+	return n.application.handleRequest(url, method)
+}
+
 func (a *Application) handleRequest(url, method string) (int, string) {
 	if url == "/app/status" && method == "GET" {
 		return 200, "Ok"
@@ -23,14 +31,6 @@ func (a *Application) handleRequest(url, method string) (int, string) {
 		return 201, "User Created"
 	}
 	return 404, "Not Ok"
-}
-
-func (n *Nginx) handleRequest(url, method string) (int, string) {
-	allowed := n.checkRateLimiting(url)
-	if !allowed {
-		return 403, "Not Allowed"
-	}
-	return n.application.handleRequest(url, method)
 }
 
 func (n *Nginx) checkRateLimiting(url string) bool {

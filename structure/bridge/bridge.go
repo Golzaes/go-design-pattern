@@ -14,13 +14,10 @@ type (
 )
 
 type (
-	EP struct{}
-	HP struct{}
-)
-
-type (
 	Mac struct{ printer Printer }
 	Win struct{ printer Printer }
+	EP  struct{}
+	HP  struct{}
 )
 
 func (*HP) PrintFile() { fmt.Println("Printing by a HP Printer") }
