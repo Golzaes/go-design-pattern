@@ -8,9 +8,7 @@ type (
 		SetPrinter(Printer)
 	}
 
-	Printer interface {
-		PrintFile()
-	}
+	Printer interface{ PrintFile() }
 )
 
 type (
