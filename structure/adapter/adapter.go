@@ -26,6 +26,7 @@ func (w *WindowsAdapter) InsertIntoLightningPort() {
 	fmt.Println("Adapter converts Lightning signal to USB.")
 	w.insertIntoUSBPort()
 }
+
 func (*Windows) insertIntoUSBPort() {
 	fmt.Println("USB connector is plugged into windows machine.")
 }
